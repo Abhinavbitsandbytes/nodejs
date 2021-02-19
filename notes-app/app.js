@@ -2,5 +2,5 @@
 const getNotes = require('./notes.js')
 const chalk = require('chalk')
 
-console.log(chalk.green.inverse.bold('success yay!'))
+console.log(chalk.green.inverse.bold('success yayyy!'))
 
