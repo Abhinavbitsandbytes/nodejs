@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const { query } = require('express')
 
 const app = express()
 
@@ -40,8 +41,29 @@ app.get('', (req,res) =>{
     })
 })
 app.get('/weather', (req,res)=>{
-    res.send('weather')
+    if(!req.query.address){
+        return   res.send({
+            error:"you must provide a address"
+        })
+    }
+    res.send({
+        forecast:'It is snowing',
+        location:'Philadelphia',
+        address:req.query.address
+    })
 })
+
+app.get('/products', (req,res)=>{
+    if(!req.query.search){
+     return   res.send({
+            error:"you must provide a search term"
+        })
+    }
+res.send({
+    products:[]
+})
+})
+
 app.get('/help/*', (req,res)=>{
     res.render('404', {
         title:'404',
