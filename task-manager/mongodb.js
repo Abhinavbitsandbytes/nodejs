@@ -15,22 +15,41 @@ MongoClient.connect(
     }
     const db = client.db(databaseName);
 
-// db.collection('users').findOne({_id:new ObjectID("6033ee3494eb2b311430781e")}, (error, user) => {
-//     if(error){
-//         return console.log('unable to fetch')
-//     }
+//  db.collection('users').updateOne({
+//         _id: new ObjectID("6033ee3494eb2b311430781d")
+//     }, {
+//         $set:{
+//             name:'Mike'
+//         }
+//     }).then((result)=>{
+// console.log(result)
+//     }).catch((error)=>{
+// console.log(error)
+//     })
 
-//     console.log(user)
-// })
+// Goal: Use updateMany to complete all tasks
+// 1. check the document for updateMany
 
-db.collection('users').find({age:25}).toArray((error, users)=>{
-
-    if(error){
-        return console.log('unable to fetch')
+db.collection('tasks').updateMany({
+    completed:false
+}, {
+    $set:{
+        completed:true
     }
-
-    console.log(users)
+}).then((result) =>{
+    console.log(result)
+}).catch((error)=>{
+    console.log(error)
 })
+
+
+
+
+
+
+
+
+
 
 
   }
