@@ -47,6 +47,28 @@ res.send(user)
         res.status(500).send()
     })
 })
+
+app.get('/tasks', (req,res)=>{
+    Task.find({}).then((tasks)=>{
+        res.send(tasks)
+    }).catch((error)=>{
+        res.status(404).send()
+    })
+})
+
+app.get('/tasks/:id', (req,res)=>{
+
+    const _id = req.params.id
+    Task.findById(_id).then((task)=>{
+        if(!task){
+            return res.status(404).send()
+        }
+        res.send(task)
+    }).catch((error)=>{
+        console.log('err', error)
+        res.status(500).send(error)
+    })
+})
 app.listen(port, ()=>{
     console.log('server is up on port', port)
 })
