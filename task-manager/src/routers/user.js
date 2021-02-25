@@ -54,7 +54,11 @@ const updates = Object.keys(req.body)
         return res.status(400).send('invalid update')
     }
     try{
-      const user = await User.findByIdAndUpdate(req.params.id, req.body, {new:true, runValidators:true})  
+      const user = await User.findById(req.params.id)  
+      updates.forEach((update)=>{
+        return  user[update] = req.body[update]
+      })
+      await user.save()
 
 if(!user){
     return res.status(404).send()
